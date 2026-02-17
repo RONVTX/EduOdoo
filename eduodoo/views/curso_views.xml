@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_curso_list" model="ir.ui.view">
+            <field name="name">Cursos - Lista</field>
+            <field name="model">eduodoo.curso</field>
+            <field name="arch" type="xml">
+                <list decoration-success="activo" decoration-muted="not activo">
+                    <field name="titulo"/>
+                    <field name="nivel"/>
+                    <field name="precio"/>
+                    <field name="fecha_creacion"/>
+                    <field name="activo"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_curso_form" model="ir.ui.view">
+            <field name="name">Cursos - Formulario</field>
+            <field name="model">eduodoo.curso</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Información del Curso">
+                                <field name="titulo"/>
+                                <field name="nivel"/>
+                                <field name="precio"/>
+                                <field name="activo"/>
+                            </group>
+                            <group string="Información Adicional">
+                                <field name="fecha_creacion" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Descripción">
+                            <field name="descripcion" nolabel="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Clases">
+                                <field name="clases"/>
+                            </page>
+                            <page string="Sesiones">
+                                <field name="sesiones"/>
+                            </page>
+                            <page string="Alumnos Inscritos">
+                                <field name="alumnos" widget="many2many_tags"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_curso_search" model="ir.ui.view">
+            <field name="name">Cursos - Búsqueda</field>
+            <field name="model">eduodoo.curso</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="titulo"/>
+                    <field name="nivel"/>
+                    <separator/>
+                    <filter name="filter_activos" string="Activos" domain="[('activo', '=', True)]"/>
+                    <filter name="filter_inactivos" string="Inactivos" domain="[('activo', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_curso" model="ir.actions.act_window">
+            <field name="name">Cursos</field>
+            <field name="res_model">eduodoo.curso</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_curso_search"/>
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('view_curso_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_curso_form')})]"/>
+        </record>
+    </data>
+</odoo>

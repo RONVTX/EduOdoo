@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista lista de Matrículas -->
+        <record id="view_matricula_tree" model="ir.ui.view">
+            <field name="name">Matrículas - Lista</field>
+            <field name="model">eduodoo.matricula</field>
+            <field name="arch" type="xml">
+                <list decoration-success="estado == 'pagada'" decoration-warning="estado == 'confirmada'" decoration-info="estado == 'borrador'" decoration-danger="estado == 'cancelada'">
+                    <field name="alumno_id"/>
+                    <field name="sesion_id"/>
+                    <field name="fecha"/>
+                    <field name="precio_inscripcion"/>
+                    <field name="saldo_pendiente" widget="float" decoration-danger="saldo_pendiente > 0"/>
+                    <field name="estado"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_matricula_form" model="ir.ui.view">
+            <field name="name">Matrículas - Formulario</field>
+            <field name="model">eduodoo.matricula</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirmar Matrícula" class="oe_highlight" invisible="estado != 'borrador'"/>
+                        <button name="action_set_paid" type="object" string="Marcar como Pagada" class="oe_highlight" invisible="estado not in ['confirmada', 'borrador']"/>
+                        <button name="action_cancel" type="object" string="Cancelar Matrícula" class="oe_highlight" invisible="estado == 'cancelada'"/>
+                        <field name="estado" widget="statusbar" statusbar_visible="borrador,confirmada,pagada,cancelada"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Información Principal">
+                                <field name="alumno_id" readonly="estado != 'borrador'"/>
+                                <field name="sesion_id" readonly="estado != 'borrador'"/>
+                                <field name="fecha"/>
+                            </group>
+                            <group string="Datos Financieros">
+                                <field name="precio_inscripcion" readonly="1"/>
+                                <field name="saldo_pendiente" readonly="1"/>
+                                <field name="fecha_pago" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Fechas de Gestión">
+                            <field name="fecha_confirmacion" readonly="1"/>
+                        </group>
+                        <group string="Notas e Información Adicional">
+                            <field name="notas" nolabel="1"/>
+                            <field name="observaciones" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_matricula_search" model="ir.ui.view">
+            <field name="name">Matrículas - Búsqueda</field>
+            <field name="model">eduodoo.matricula</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="alumno_id"/>
+                    <field name="sesion_id"/>
+                    <field name="display_name"/>
+                    <filter name="filter_borrador" string="Borrador" domain="[('estado', '=', 'borrador')]"/>
+                    <filter name="filter_confirmada" string="Confirmada" domain="[('estado', '=', 'confirmada')]"/>
+                    <filter name="filter_pagada" string="Pagada" domain="[('estado', '=', 'pagada')]"/>
+                    <filter name="filter_cancelada" string="Cancelada" domain="[('estado', '=', 'cancelada')]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_matricula" model="ir.actions.act_window">
+            <field name="name">Matrículas</field>
+            <field name="res_model">eduodoo.matricula</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_matricula_search"/>
+            <field name="view_id" ref="view_matricula_tree"/>
+        </record>
+
+    </data>
+</odoo>

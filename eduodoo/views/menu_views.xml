@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_eduodoo_root" name="EduOdoo" sequence="10" web_icon="eduodoo,static/description/icon.png"/>
+
+        <menuitem id="menu_eduodoo_academic" name="Gestión Académica" parent="menu_eduodoo_root" sequence="10"/>
+
+        <menuitem id="menu_course" name="Cursos" parent="menu_eduodoo_academic" action="action_curso" sequence="10"/>
+        <menuitem id="menu_alumno" name="Alumnos" parent="menu_eduodoo_academic" action="action_alumno" sequence="20"/>
+        <menuitem id="menu_clases" name="Clases" parent="menu_eduodoo_academic" action="action_clases" sequence="30"/>
+        <menuitem id="menu_sesion" name="Sesiones" parent="menu_eduodoo_academic" action="action_sesion" sequence="40"/>
+        <menuitem id="menu_profesor" name="Profesores" parent="menu_eduodoo_academic" action="action_profesor" sequence="35"/>
+
+        <menuitem id="menu_eduodoo_admin" name="Administración" parent="menu_eduodoo_root" sequence="20"/>
+
+        <menuitem id="menu_asistencia" name="Asistencia" parent="menu_eduodoo_admin" action="action_asistencia" sequence="10"/>
+        <menuitem id="menu_facturacion" name="Facturación" parent="menu_eduodoo_admin" action="action_facturacion" sequence="20"/>
+        <menuitem id="menu_matricula" name="Matrículas" parent="menu_eduodoo_admin" action="action_matricula" sequence="30"/>
+    </data>
+</odoo>

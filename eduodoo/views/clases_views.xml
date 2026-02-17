@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_clases_list" model="ir.ui.view">
+            <field name="name">Clases - Lista</field>
+            <field name="model">eduodoo.clases</field>
+            <field name="arch" type="xml">
+                <list decoration-success="activo" decoration-muted="not activo">
+                    <field name="nombre_clase"/>
+                    <field name="codigo_clase"/>
+                    <field name="curso_id"/>
+                    <field name="profesor_id"/>
+                    <field name="dia_semana"/>
+                    <field name="hora_inicio"/>
+                    <field name="hora_fin"/>
+                    <field name="numero_alumnos"/>
+                    <field name="capacidad_maxima"/>
+                    <field name="porcentaje_ocupacion" widget="progressbar"/>
+                    <field name="activo"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_clases_form" model="ir.ui.view">
+            <field name="name">Clases - Formulario</field>
+            <field name="model">eduodoo.clases</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_generar_lista_asistencia" type="object" string="Lista de Asistencia" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_generar_lista_asistencia" type="object" string="Asistencia" icon="fa-check-square"/>
+                        </div>
+                        <group>
+                            <group string="Información de Clase">
+                                <field name="nombre_clase"/>
+                                <field name="codigo_clase"/>
+                                <field name="curso_id"/>
+                            </group>
+                            <group string="Horario">
+                                <field name="dia_semana"/>
+                                <field name="hora_inicio"/>
+                                <field name="hora_fin"/>
+                                <field name="duracion_clase" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Capacidad y Ocupación">
+                            <group>
+                                <field name="capacidad_maxima"/>
+                                <field name="numero_alumnos" readonly="1"/>
+                                <field name="capacidad_disponible" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="porcentaje_ocupacion" widget="progressbar" readonly="1"/>
+                                <field name="profesor_id"/>
+                                <field name="activo"/>
+                            </group>
+                        </group>
+                        <group string="Fechas">
+                            <field name="fecha_inicio_clase"/>
+                            <field name="fecha_fin_clase"/>
+                        </group>
+                        <group string="Descripción">
+                            <field name="descripcion" nolabel="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Alumnos">
+                                <field name="alumnos" widget="many2many_tags"/>
+                            </page>
+                            <page string="Sesiones">
+                                <field name="sesiones"/>
+                            </page>
+                            <page string="Asistencias">
+                                <field name="asistencias"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_clases_search" model="ir.ui.view">
+            <field name="name">Clases - Búsqueda</field>
+            <field name="model">eduodoo.clases</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="nombre_clase"/>
+                    <field name="codigo_clase"/>
+                    <field name="curso_id"/>
+                    <field name="profesor_id"/>
+                    <filter name="filter_activos" string="Activos" domain="[('activo', '=', True)]"/>
+                    <filter name="filter_inactivos" string="Inactivos" domain="[('activo', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_clases" model="ir.actions.act_window">
+            <field name="name">Clases</field>
+            <field name="res_model">eduodoo.clases</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_clases_search"/>
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('view_clases_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_clases_form')})]" />
+        </record>
+    </data>
+</odoo>

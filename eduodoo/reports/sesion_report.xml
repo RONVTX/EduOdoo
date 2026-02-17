@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <template id="report_sesion_document">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h2>Reporte de Sesión - <t t-esc="doc.numero_sesion"/></h2>
+                    <p><strong>Curso:</strong> <t t-esc="doc.curso_id.display_name or ''"/></p>
+                    <p><strong>Clase:</strong> <t t-esc="doc.clase_id.display_name or ''"/></p>
+                    <p><strong>Profesor:</strong> <t t-esc="doc.profesor_id.name or ''"/></p>
+                    <p><strong>Fecha inicio:</strong> <t t-esc="doc.fecha_inicio or ''"/></p>
+                    <p><strong>Fecha fin:</strong> <t t-esc="doc.fecha_fin or ''"/></p>
+                    <p><strong>Asientos ocupados:</strong> <t t-esc="doc.asientos_ocupados or 0"/> / <t t-esc="doc.numero_asientos or 0"/> (<t t-esc="doc.porcentaje_ocupacion or 0"/> %)</p>
+                    <p><strong>Descripción:</strong></p>
+                    <div><t t-out="doc.descripcion or ''"/></div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report id="action_sesion_report"
+            model="eduodoo.sesion"
+            string="Reporte de Sesión"
+            report_type="qweb-pdf"
+            name="eduodoo.report_sesion_document"
+            file="eduodoo.report_sesion_document"/>
+    </data>
+</odoo>

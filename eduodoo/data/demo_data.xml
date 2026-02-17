@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        
+        <record id="profesor_ronvtx" model="eduodoo.profesor">
+            <field name="name">Ronald Martinez (RONVTX)</field>
+            <field name="email">ronald.martinez@academia.com</field>
+            <field name="phone">+34 612 111 111</field>
+            <field name="notas">Profesor titular de Inglés nivel A1</field>
+        </record>
+
+        <record id="profesor_emma" model="eduodoo.profesor">
+            <field name="name">Emma Johnson</field>
+            <field name="email">emma.johnson@academia.com</field>
+            <field name="phone">+34 612 222 222</field>
+            <field name="notas">Profesora de Inglés nivel A2 y B1</field>
+        </record>
+
+        <record id="alumno_juan" model="eduodoo.alumno">
+            <field name="nombre">Juan</field>
+            <field name="apellidos">García González</field>
+            <field name="email">juan.garcia@email.com</field>
+            <field name="telefono">+34 612 345 678</field>
+            <field name="direccion">Calle Principal, 123, Apto 4B</field>
+            <field name="ciudad">Madrid</field>
+            <field name="codigo_postal">28001</field>
+            <field name="activo">True</field>
+        </record>
+
+        <record id="alumno_maria" model="eduodoo.alumno">
+            <field name="nombre">María</field>
+            <field name="apellidos">López Fernández</field>
+            <field name="email">maria.lopez@email.com</field>
+            <field name="telefono">+34 623 456 789</field>
+            <field name="direccion">Avenida Secundaria, 456</field>
+            <field name="ciudad">Barcelona</field>
+            <field name="codigo_postal">08002</field>
+            <field name="activo">True</field>
+        </record>
+
+        <record id="alumno_carlos" model="eduodoo.alumno">
+            <field name="nombre">Carlos</field>
+            <field name="apellidos">Rodríguez Martínez</field>
+            <field name="email">carlos.rodriguez@email.com</field>
+            <field name="telefono">+34 634 567 890</field>
+            <field name="direccion">Plaza Central, 789</field>
+            <field name="ciudad">Valencia</field>
+            <field name="codigo_postal">46001</field>
+            <field name="activo">True</field>
+        </record>
+
+        <record id="alumno_sofia" model="eduodoo.alumno">
+            <field name="nombre">Sofía</field>
+            <field name="apellidos">Martín Pérez</field>
+            <field name="email">sofia.martin@email.com</field>
+            <field name="telefono">+34 645 678 901</field>
+            <field name="direccion">Calle de la Paz, 321</field>
+            <field name="ciudad">Bilbao</field>
+            <field name="codigo_postal">48001</field>
+            <field name="activo">True</field>
+        </record>
+
+        <record id="alumno_ana" model="eduodoo.alumno">
+            <field name="nombre">Ana</field>
+            <field name="apellidos">Sánchez García</field>
+            <field name="email">ana.sanchez@email.com</field>
+            <field name="telefono">+34 656 789 012</field>
+            <field name="direccion">Calle Mayor, 555</field>
+            <field name="ciudad">Sevilla</field>
+            <field name="codigo_postal">41001</field>
+            <field name="activo">True</field>
+        </record>
+
+        <record id="curso_ingles_a1" model="eduodoo.curso">
+            <field name="titulo">Inglés - Nivel A1 (Principiante)</field>
+            <field name="descripcion">Curso diseñado para principiantes absolutos. Se cubrirán expresiones básicas, presentaciones personales y vocabulario fundamental.</field>
+            <field name="nivel">a1</field>
+            <field name="precio">150.00</field>
+            <field name="activo">True</field>
+        </record>
+
+        <record id="curso_ingles_a2" model="eduodoo.curso">
+            <field name="titulo">Inglés - Nivel A2 (Elemental)</field>
+            <field name="descripcion">Curso para estudiantes con conocimientos básicos. Se enfoca en conversación, lectura y escritura a nivel elemental.</field>
+            <field name="nivel">a2</field>
+            <field name="precio">180.00</field>
+            <field name="activo">True</field>
+        </record>
+
+        <record id="curso_ingles_b1" model="eduodoo.curso">
+            <field name="titulo">Inglés - Nivel B1 (Intermedio)</field>
+            <field name="descripcion">Curso para estudiantes intermedios. Se trabaja fluidez, comprensión auditiva avanzada y expresión escrita.</field>
+            <field name="nivel">b1</field>
+            <field name="precio">200.00</field>
+            <field name="activo">True</field>
+        </record>
+
+        <record id="curso_spanol_a1" model="eduodoo.curso">
+            <field name="titulo">Español - Nivel A1 (Principiante)</field>
+            <field name="descripcion">Introducción al español para hablantes no nativos. Cubre lo básico del idioma.</field>
+            <field name="nivel">a1</field>
+            <field name="precio">140.00</field>
+            <field name="activo">True</field>
+        </record>
+
+
+        <record id="clase_ingles_a1_manana" model="eduodoo.clases">
+            <field name="nombre_clase">Inglés A1 - Grupo Mañana</field>
+            <field name="codigo_clase">A1-2025-MAÑANA</field>
+            <field name="curso_id" ref="curso_ingles_a1"/>
+            <field name="dia_semana">lunes</field>
+            <field name="hora_inicio">9.00</field>
+            <field name="hora_fin">11.00</field>
+            <field name="capacidad_maxima">15</field>
+            <field name="descripcion">Clase matutina de Inglés nivel A1</field>
+            <field name="fecha_inicio_clase">2025-01-27</field>
+            <field name="fecha_fin_clase">2025-03-31</field>
+            <field name="activo">True</field>
+            <field name="alumnos" eval="[(6, 0, [ref('alumno_juan'), ref('alumno_maria'), ref('alumno_carlos')])]"/>
+        </record>
+
+        <record id="clase_ingles_a1_tarde" model="eduodoo.clases">
+            <field name="nombre_clase">Inglés A1 - Grupo Tarde</field>
+            <field name="codigo_clase">A1-2025-TARDE</field>
+            <field name="curso_id" ref="curso_ingles_a1"/>
+            <field name="dia_semana">martes</field>
+            <field name="hora_inicio">18.00</field>
+            <field name="hora_fin">20.00</field>
+            <field name="capacidad_maxima">12</field>
+            <field name="descripcion">Clase vespertina de Inglés nivel A1</field>
+            <field name="fecha_inicio_clase">2025-01-28</field>
+            <field name="fecha_fin_clase">2025-03-31</field>
+            <field name="activo">True</field>
+            <field name="alumnos" eval="[(6, 0, [ref('alumno_sofia'), ref('alumno_ana')])]"/>
+        </record>
+
+        <record id="clase_ingles_a2" model="eduodoo.clases">
+            <field name="nombre_clase">Inglés A2 - Grupo Único</field>
+            <field name="codigo_clase">A2-2025-UNICO</field>
+            <field name="curso_id" ref="curso_ingles_a2"/>
+            <field name="dia_semana">miercoles</field>
+            <field name="hora_inicio">17.00</field>
+            <field name="hora_fin">19.00</field>
+            <field name="capacidad_maxima">10</field>
+            <field name="descripcion">Clase de Inglés nivel A2</field>
+            <field name="fecha_inicio_clase">2025-01-29</field>
+            <field name="fecha_fin_clase">2025-03-31</field>
+            <field name="activo">True</field>
+        </record>
+
+        <record id="sesion_ingles_a1_01" model="eduodoo.sesion">
+            <field name="numero_sesion">SES-001</field>
+            <field name="curso_id" ref="curso_ingles_a1"/>
+            <field name="clase_id" ref="clase_ingles_a1_manana"/>
+            <field name="profesor_id" ref="profesor_ronvtx"/>
+            <field name="fecha_inicio">2026-02-06 10:00:00</field>
+            <field name="duracion">120</field>
+            <field name="numero_asientos">15</field>
+            <field name="descripcion">Primera sesión - Presentaciones y saludos</field>
+            <field name="estado">programada</field>
+        </record>
+
+        <record id="sesion_ingles_a1_02" model="eduodoo.sesion">
+            <field name="numero_sesion">SES-002</field>
+            <field name="curso_id" ref="curso_ingles_a1"/>
+            <field name="clase_id" ref="clase_ingles_a1_manana"/>
+            <field name="profesor_id" ref="profesor_ronvtx"/>
+            <field name="fecha_inicio">2026-02-10 10:00:00</field>
+            <field name="duracion">120</field>
+            <field name="numero_asientos">15</field>
+            <field name="descripcion">Segunda sesión - Vocabulario básico</field>
+            <field name="estado">programada</field>
+        </record>
+
+        <record id="sesion_ingles_a1_tarde_01" model="eduodoo.sesion">
+            <field name="numero_sesion">SES-003</field>
+            <field name="curso_id" ref="curso_ingles_a1"/>
+            <field name="clase_id" ref="clase_ingles_a1_tarde"/>
+            <field name="profesor_id" ref="profesor_emma"/>
+            <field name="fecha_inicio">2026-02-03 18:00:00</field>
+            <field name="duracion">120</field>
+            <field name="numero_asientos">12</field>
+            <field name="descripcion">Sesión tarde 1 - Presentaciones</field>
+            <field name="estado">programada</field>
+        </record>
+
+        <record id="factura_juan_ingles_a1" model="eduodoo.facturacion">
+            <field name="alumno_id" ref="alumno_juan"/>
+            <field name="curso_id" ref="curso_ingles_a1"/>
+            <field name="cantidad">150.00</field>
+            <field name="fecha_factura">2025-01-20</field>
+            <field name="concepto">matricula</field>
+            <field name="descripcion">Matrícula curso Inglés A1</field>
+            <field name="estado">pendiente</field>
+        </record>
+
+        <record id="factura_maria_ingles_a1" model="eduodoo.facturacion">
+            <field name="alumno_id" ref="alumno_maria"/>
+            <field name="curso_id" ref="curso_ingles_a1"/>
+            <field name="cantidad">150.00</field>
+            <field name="fecha_factura">2025-01-20</field>
+            <field name="fecha_pago">2025-01-22</field>
+            <field name="concepto">matricula</field>
+            <field name="descripcion">Matrícula curso Inglés A1</field>
+            <field name="estado">pagada</field>
+        </record>
+
+        <record id="factura_carlos_ingles_a1" model="eduodoo.facturacion">
+            <field name="alumno_id" ref="alumno_carlos"/>
+            <field name="curso_id" ref="curso_ingles_a1"/>
+            <field name="cantidad">150.00</field>
+            <field name="fecha_factura">2025-01-20</field>
+            <field name="concepto">matricula</field>
+            <field name="descripcion">Matrícula curso Inglés A1</field>
+            <field name="estado">pendiente</field>
+        </record>
+
+        <record id="factura_sofia_ingles_a1" model="eduodoo.facturacion">
+            <field name="alumno_id" ref="alumno_sofia"/>
+            <field name="curso_id" ref="curso_ingles_a1"/>
+            <field name="cantidad">150.00</field>
+            <field name="fecha_factura">2025-01-20</field>
+            <field name="concepto">matricula</field>
+            <field name="descripcion">Matrícula curso Inglés A1</field>
+            <field name="estado">pendiente</field>
+        </record>
+
+        <record id="asistencia_juan_sesion1" model="eduodoo.asistencia">
+            <field name="alumno_id" ref="alumno_juan"/>
+            <field name="clase_id" ref="clase_ingles_a1_manana"/>
+            <field name="sesion_id" ref="sesion_ingles_a1_01"/>
+            <field name="fecha_asistencia">2026-02-06</field>
+            <field name="presente">True</field>
+            <field name="observaciones">Alumno participativo y atento</field>
+        </record>
+
+        <record id="asistencia_maria_sesion1" model="eduodoo.asistencia">
+            <field name="alumno_id" ref="alumno_maria"/>
+            <field name="clase_id" ref="clase_ingles_a1_manana"/>
+            <field name="sesion_id" ref="sesion_ingles_a1_01"/>
+            <field name="fecha_asistencia">2026-02-06</field>
+            <field name="presente">True</field>
+        </record>
+
+        <record id="asistencia_carlos_sesion1" model="eduodoo.asistencia">
+            <field name="alumno_id" ref="alumno_carlos"/>
+            <field name="clase_id" ref="clase_ingles_a1_manana"/>
+            <field name="sesion_id" ref="sesion_ingles_a1_01"/>
+            <field name="fecha_asistencia">2026-02-06</field>
+            <field name="presente">False</field>
+            <field name="justificacion">Justificante médico presentado</field>
+        </record>
+
+        <record id="asistencia_sofia_sesion1_tarde" model="eduodoo.asistencia">
+            <field name="alumno_id" ref="alumno_sofia"/>
+            <field name="clase_id" ref="clase_ingles_a1_tarde"/>
+            <field name="sesion_id" ref="sesion_ingles_a1_tarde_01"/>
+            <field name="fecha_asistencia">2026-02-03</field>
+            <field name="presente">True</field>
+        </record>
+
+        <record id="asistencia_ana_sesion1_tarde" model="eduodoo.asistencia">
+            <field name="alumno_id" ref="alumno_ana"/>
+            <field name="clase_id" ref="clase_ingles_a1_tarde"/>
+            <field name="sesion_id" ref="sesion_ingles_a1_tarde_01"/>
+            <field name="fecha_asistencia">2026-02-03</field>
+            <field name="presente">True</field>
+        </record>
+
+    </data>
+
+    <data noupdate="1">
+        
+        <record id="curso_ingles_a1" model="eduodoo.curso">
+            <field name="alumnos" eval="[(6, 0, [ref('alumno_juan'), ref('alumno_maria'), ref('alumno_carlos'), ref('alumno_sofia'), ref('alumno_ana')])]"/>
+        </record>
+
+    </data>
+</odoo>

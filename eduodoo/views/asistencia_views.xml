@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_asistencia_list" model="ir.ui.view">
+            <field name="name">Asistencia - Lista</field>
+            <field name="model">eduodoo.asistencia</field>
+            <field name="arch" type="xml">
+                <list decoration-success="presente" decoration-muted="not presente and justificacion" decoration-danger="not presente and not justificacion">
+                    <field name="fecha_asistencia"/>
+                    <field name="alumno_id"/>
+                    <field name="clase_id"/>
+                    <field name="sesion_id"/>
+                    <field name="presente"/>
+                    <field name="estado_asistencia"/>
+                    <field name="justificacion"/>
+                </list>
+            </field>
+        </record>
+        <record id="view_asistencia_form" model="ir.ui.view">
+            <field name="name">Asistencia - Formulario</field>
+            <field name="model">eduodoo.asistencia</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_marcar_presente" type="object" string="Marcar Presente" class="oe_highlight" invisible="presente"/>
+                        <button name="action_marcar_ausente" type="object" string="Marcar Ausente" class="btn btn-danger" invisible="not presente"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Información de Asistencia">
+                                <field name="alumno_id" readonly="1"/>
+                                <field name="clase_id" readonly="1"/>
+                                <field name="sesion_id" readonly="1"/>
+                                <field name="fecha_asistencia"/>
+                            </group>
+                            <group string="Estado de Asistencia">
+                                <field name="presente"/>
+                                <field name="estado_asistencia" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Justificación y Observaciones" invisible="presente">
+                            <field name="justificacion" nolabel="1" placeholder="Ingrese la justificación de la ausencia..."/>
+                        </group>
+                        <group string="Observaciones Adicionales">
+                            <field name="observaciones" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_asistencia_search" model="ir.ui.view">
+            <field name="name">Asistencia - Búsqueda</field>
+            <field name="model">eduodoo.asistencia</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="alumno_id"/>
+                    <field name="clase_id"/>
+                    <field name="sesion_id"/>
+                    <field name="fecha_asistencia"/>
+                    <filter name="filter_presente" string="Presentes" domain="[('presente', '=', True)]"/>
+                    <filter name="filter_ausente" string="Ausentes" domain="[('presente', '=', False)]"/>
+                    <filter name="filter_ausente_justificado" string="Ausentes Justificados" domain="[('presente', '=', False), ('justificacion', '!=', False)]"/>
+                    <filter name="filter_ausente_injustificado" string="Ausentes Sin Justificación" domain="[('presente', '=', False), ('justificacion', '=', False)]"/>
+                    <filter name="filter_hoy" string="Hoy" domain="[('fecha_asistencia', '=', context_today())]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_asistencia_calendar" model="ir.ui.view">
+            <field name="name">Asistencia - Calendario</field>
+            <field name="model">eduodoo.asistencia</field>
+            <field name="arch" type="xml">
+                <calendar string="Registro de Asistencias" date_start="fecha_asistencia" color="alumno_id">
+                    <field name="alumno_id"/>
+                    <field name="clase_id"/>
+                    <field name="presente"/>
+                    <field name="estado_asistencia"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="action_asistencia" model="ir.actions.act_window">
+            <field name="name">Asistencia</field>
+            <field name="res_model">eduodoo.asistencia</field>
+            <field name="view_mode">list,calendar,form</field>
+            <field name="search_view_id" ref="view_asistencia_search"/>
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('view_asistencia_list')}), (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_asistencia_calendar')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_asistencia_form')})]" />
+        </record>
+    </data>
+</odoo>
